@@ -1,8 +1,7 @@
 { config, pkgs, inputs, ... }:
 
 {
-  imports = 
-    [ ];
+  imports = [ ../../modules/home-manager/hypr ];
 
   home.username = "ben";
   home.homeDirectory = "/home/ben";
