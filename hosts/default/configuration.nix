@@ -10,45 +10,26 @@
 
   # Use the GRUB 2 boot loader.
   boot.loader.grub.enable = true;
-  # boot.loader.grub.efiSupport = true;
-  # boot.loader.grub.efiInstallAsRemovable = true;
-  # boot.loader.efi.efiSysMountPoint = "/boot/efi";
-  # Define on which hard drive you want to install Grub.
-  boot.loader.grub.device = "/dev/sda"; # or "nodev" for efi only
+  boot.loader.grub.device = "/dev/sda";
 
   networking.hostName = "icarus"; # Define your hostname.
-  networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+  networking.networkmanager.enable = true;
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Set your time zone.
   time.timeZone = "America/Los_Angeles";
 
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Select internationalisation properties.
-  # i18n.defaultLocale = "en_US.UTF-8";
-  # console = {
-  #   font = "Lat2-Terminus16";
-  #   keyMap = "us";
-  #   useXkbConfig = true; # use xkb.options in tty.
-  # };
-
-  # Enable the X11 windowing system.
-  # services.xserver.enable = true;
+  # Enable Hyprland
   programs.hyprland.enable = true;
+
+
   programs.hyprland.xwayland.enable = true;
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
   
   # Desktop portals (screen sharing, link opening, file opening, etc.)
   xdg.portal.enable = true;
   xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ]; # TODO: many other options  
-
-  # Configure keymap in X11
-  # services.xserver.xkb.layout = "us";
-  # services.xserver.xkb.options = "eurosign:e,caps:escape";
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -67,7 +48,7 @@
   };
 
   # Enable touchpad support (enabled default in most desktopManager).
-  services.libinput.enable = true;
+  #services.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.ben = {
@@ -76,13 +57,14 @@
       "wheel" # Enable ‘sudo’ for the user.
       "networkmanager"
     ];
+    #shell = pkgs.zsh;
   };
  
   home-manager = {
     extraSpecialArgs = { inherit inputs; };
-    users = {
-      "ben" = import ./home.nix;
-    };
+    #sharedModules = [ inputs.self.outputs.hm-modules.default ];
+
+    users."ben" = import ./home.nix;
   };
 
   nixpkgs.config.allowUnfree = true;  
@@ -90,18 +72,26 @@
   programs.neovim.enable = true;
   programs.neovim.defaultEditor = true;
 
+  programs.nm-applet.enable = true;
+
+  #programs.zsh.enable = true;
+  #users.defaultUserShell = pkgs.zsh;
+
   # List packages installed in system profile.
+  # TODO: mix with pkgs and non-pkgs packages?
   environment.systemPackages = with pkgs; [
     wget
     git
 
     firefox
-    vscode
     discord
     
     # NOTE: it is vitally important for any packages in hyprland.conf to be downloaded
     # TODO: since hyprland.conf is user specific, is their breakiness user specific? test with home manager
-    kitty # editor # TODO: find liked terminal
+    # terminal
+    #wezterm #TODO: this should be fixed soon
+    alacritty
+
     waybar
     dunst # notification daemon
       libnotify
@@ -112,30 +102,6 @@
     slurp        # select util       |
     wl-clipboard # xclip alt       --+
   ];
-
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
-
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
-
-  # Copy the NixOS configuration file and link it from the resulting system
-  # (/run/current-system/configuration.nix). This is useful in case you
-  # accidentally delete configuration.nix.
-  # system.copySystemConfiguration = true;
 
   # This option defines the first version of NixOS you have installed on this particular machine,
   # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.

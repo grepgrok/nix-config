@@ -7,17 +7,20 @@
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
-    };
+    }; 
   };
 
   outputs = { self, nixpkgs, ... }@inputs: {
+
     nixosConfigurations.default = nixpkgs.lib.nixosSystem {
-      #extraSpecialArgs?
       specialArgs = { inherit inputs; };
       modules = [
         ./hosts/default/configuration.nix
+	#./modules
         inputs.home-manager.nixosModules.default
       ];
     };
+
+    #hm-modules.default = ./hm-modules;
   };
 }
