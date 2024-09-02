@@ -46,6 +46,7 @@
       "wheel" # Enable ‘sudo’ for the user.
       "networkmanager"
     ];
+    shell = pkgs.zsh;
   };
  
   home-manager = {
@@ -72,6 +73,9 @@
   programs.neovim.defaultEditor = true;
 
   programs.nm-applet.enable = true;
+  
+  programs.zsh.enable = true;
+  users.defaultUserShell = pkgs.zsh;
 
   # List packages installed in system profile
   # TODO: mix `with pkgs;` and non-pkgs?
