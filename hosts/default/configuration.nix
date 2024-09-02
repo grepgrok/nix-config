@@ -31,11 +31,14 @@
     sharedModules = [ inputs.self.outputs.homeManagerModules.default ];
   };
 
+  programs.hyprland.enable = true;
+
   programs.neovim.enable = true;
   programs.neovim.defaultEditor = true;
 
   environment.systemPackages = with pkgs; [
     git
+    alacritty
   ];
 
   system.stateVersion = "24.05"; # Did you read the comment?

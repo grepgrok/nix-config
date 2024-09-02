@@ -3,7 +3,7 @@
 {
   imports = 
     [
-      #./hypr
+      ./hypr/default.nix
       ./git.nix
     ];
 }

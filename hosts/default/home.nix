@@ -9,4 +9,5 @@
   programs.home-manager.enable = true;
   
   git.enable = true;
+  hypr.enable = true;
 }
