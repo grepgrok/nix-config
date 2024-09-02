@@ -2,7 +2,7 @@
 
 {
   options = {
-    hm-manager.hypr.enable = lib.mkEnableOption "enables hypr"; 
+    hypr.enable = lib.mkEnableOption "enables hypr"; 
   };
 
   config = lib.mkIf config.hypr.enable {
