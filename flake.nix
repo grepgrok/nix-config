@@ -11,7 +11,6 @@
   };
 
   outputs = { self, nixpkgs, ... }@inputs: {
-
     nixosConfigurations.default = nixpkgs.lib.nixosSystem {
       specialArgs = { inherit inputs; };
       modules = [
@@ -20,7 +19,7 @@
       ];
     };
 
-    #homeManagerModules = import ./modules/home-manager;
-    #nixosModules.default = import ./modules/nixos;
+    homeManagerModules.default = ./modules/home-manager;
+    # nixosModules.default = import ./modules/nixos;
   };
 }

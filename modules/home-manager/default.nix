@@ -1,3 +1,3 @@
 {
-  hypr = import ./hypr;
+  imports = [ ./hypr ];
 }

@@ -1,12 +1,12 @@
-{ pkgs, lib, config, inputs, ... }:
+{ pkgs, lib, config, ... }:
 
 {
   options = {
-    hypr.enable = lib.mkEnableOption "enables hypr"; 
+    hm-manager.hypr.enable = lib.mkEnableOption "enables hypr"; 
   };
 
   config = lib.mkIf config.hypr.enable {
-    home.file.".config/hypr/hyprland.conf".source = ./hyprland.conf;
-    home.file.".config/hypr/start.sh".source = ./start.sh;
+    home.file.".config/hypr/hyprland.conf".source = lib.mkDefault ./hyprland.conf;
+    home.file.".config/hypr/start.sh".source = lib.mkDefault ./start.sh;
   };
 }
