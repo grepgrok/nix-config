@@ -17,6 +17,34 @@
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
+  # Enable auto-upgrades
+  # Check timer status: systemctl status nixos-upgrade.timer
+  # Print upgrade log: systemvtl status nixos-upgrade.service
+  system.autoUpgrade = {
+    enable = true;
+    flake = inputs.self.outPath;
+    flags = [
+      "--update-input"
+      "nixpgs"
+      "-L" # print build logs
+    ];
+    dates = "02:00";
+    randomizedDelaySec = "45min";
+  };
+
+  programs.ssh.startAgent = true;
+  #services.openssh = {
+  #  enable = true;
+  #  ports = [ 22 ];
+  #  settings = {
+  #    PasswordAuthentication = true; # whether ssh password is allowed
+  #    AllowUsers = null; # list: who can login (default: all)
+  #    UseDns = true; # use host names
+  #    X11Forwarding = false;
+  #    PermitRootLogin = "prohibit-password"; # if you can ssh into root; idk
+  #  };
+  #};
+
   # Set the time zone
   time.timeZone = "America/Los_Angeles";
 

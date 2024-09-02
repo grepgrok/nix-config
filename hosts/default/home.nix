@@ -27,6 +27,12 @@
 
   alacritty.enable = true;
   git.enable = true;
+
+  programs.ssh = {
+    enable = true;
+    addKeysToAgent = "yes";
+  };
+
   zsh.enable = true;
 
   # Home Manager is pretty good at managing dotfiles. the primary way to manage
