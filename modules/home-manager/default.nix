@@ -1,3 +1,9 @@
+{ pkgs, config, lib, ... }:
+
 {
-  imports = [ ./hypr ];
+  imports = 
+    [
+      #./hypr
+      ./git.nix
+    ];
 }
