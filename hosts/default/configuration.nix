@@ -32,18 +32,12 @@
     randomizedDelaySec = "45min";
   };
 
+  # Automatically starts ssh-agent
   programs.ssh.startAgent = true;
-  #services.openssh = {
-  #  enable = true;
-  #  ports = [ 22 ];
-  #  settings = {
-  #    PasswordAuthentication = true; # whether ssh password is allowed
-  #    AllowUsers = null; # list: who can login (default: all)
-  #    UseDns = true; # use host names
-  #    X11Forwarding = false;
-  #    PermitRootLogin = "prohibit-password"; # if you can ssh into root; idk
-  #  };
-  #};
+
+  # Enable polkit
+  # This lets non-privileged process communicate with privileged ones at a more granular level
+  security.polkit.enable = true;
 
   # Set the time zone
   time.timeZone = "America/Los_Angeles";
@@ -94,7 +88,11 @@
 
   # Desktop portals (screen sharing, link opening, etc.)
   xdg.portal.enable = true;
-  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ]; # TODO: many other options
+  xdg.portal.extraPortals =
+    [
+      pkgs.xdg-desktop-portal-hyprland
+      pkgs.xdg-desktop-portal-gtk
+    ]; # TODO: find out what makes these different
 
   ######### Other ##########
   programs.neovim.enable = true;
@@ -106,7 +104,6 @@
   users.defaultUserShell = pkgs.zsh;
 
   # List packages installed in system profile
-  # TODO: mix `with pkgs;` and non-pkgs?
   environment.systemPackages = with pkgs; [
     wget
     git

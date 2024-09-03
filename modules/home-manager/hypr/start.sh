@@ -3,12 +3,12 @@
 # initializing wallpaper daemon
 swww-daemon &
 # setting wallpaper
-sleep 5 && swww img ~/Wallpapers/DemonChild.png &
+sleep 2 && swww img ~/Wallpapers/DemonChild.png &
 
-nm-applet --indicator &
+#nm-applet --indicator &
 
 # the bar
-waybar &
+#waybar &
 
 # dust
-dunst
+#dunst
