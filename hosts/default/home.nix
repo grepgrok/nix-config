@@ -29,6 +29,15 @@
   alacritty.enable = true;
   clipse.enable = true;
   git.enable = true;
+  hypr.enable = true;
+
+  home.pointerCursor = {
+    # or "phinger-cursors-dark"
+    name = "phinger-cursors-light";
+    package = pkgs.phinger-cursors;
+    size = 32; # opt: 24, 32, 48, 64, 96, 128
+    gtk.enable = true;
+  };
   
   programs.ssh = {
     enable = true;
@@ -39,8 +48,6 @@
 
   # Home Manager is pretty good at managing dotfiles. the primary way to manage
   # plain files is through `home.file`.
-  hypr.enable = true;
-
   home.file = {
     # # Building this configuration will create a copy of `dotfiles/screenrc` in
     # # the Nix store. Activating the configuration will them make `~/.screenrc` a
