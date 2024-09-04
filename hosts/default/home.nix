@@ -1,7 +1,10 @@
 { config, pkgs, inputs, ... }:
 
 {
-  imports = [ inputs.self.outputs.homeManagerModules.default ];
+  imports = [ 
+    inputs.self.outputs.homeManagerModules.default 
+    inputs.ags.homeManagerModules.default
+    ];
 
   home.username = "ben";
   home.homeDirectory = "/home/ben";
@@ -12,12 +15,17 @@
   home.packages = [
     pkgs.alacritty
     pkgs.clipse
+    #pkgs.pactl
 
     # # it is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
     # # fonts?
     # (pkgs.nerdfont.override { fonts = [ "FantasqueSansMono" ]; })
+    # Compile waybar with experimental option
+    #(waybar.overrideAttrs (oldAttrs: {
+    #  mesonFlags = oldAttrs.mesonFlags ++ ["-Dexperimental=true" ];
+    #}))
 
     # # You can also create simple shell scripts directly inside your configuration.
     # # For example, this adds a command `my-hello` to you environment:
@@ -26,6 +34,7 @@
     # '')
   ];
 
+  ags.enable = true;
   alacritty.enable = true;
   clipse.enable = true;
   git.enable = true;
@@ -42,6 +51,10 @@
   programs.ssh = {
     enable = true;
     addKeysToAgent = "yes";
+  };
+
+  programs.waybar = {
+    enable = true;
   };
 
   zsh.enable = true;

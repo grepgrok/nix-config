@@ -130,7 +130,6 @@
     # wezterm # TODO: this should be fixed soon
     alacritty
 
-    waybar
     dunst # notification daemon
       libnotify
     swww # wallpaper daemon (TODO: ceck other options)

@@ -4,10 +4,11 @@
   imports = 
     [
       # TODO: auto-search the directory
-      ./hypr/default.nix
+      ./ags/default.nix
       ./clipse/default.nix
-      ./git.nix
+      ./hypr/default.nix
       ./alacritty.nix
+      ./git.nix
       ./zsh.nix
     ];
 }

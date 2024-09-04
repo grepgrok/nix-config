@@ -10,11 +10,11 @@ sleep 2 && swww img ~/Wallpapers/DemonChild.png &
 
 #nm-applet --indicator &
 
-# the bar
-#waybar &
+# Aylur's Gtk Shell
+ags &
 
 # Clipboard manager
 clipse -listen &
 
 # dust
-#dunst
+dunst
