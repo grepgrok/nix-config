@@ -11,6 +11,7 @@
   # The home.packages option allows you to install Nix packages into your environment
   home.packages = [
     pkgs.alacritty
+    pkgs.clipse
 
     # # it is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
@@ -26,8 +27,9 @@
   ];
 
   alacritty.enable = true;
+  clipse.enable = true;
   git.enable = true;
-
+  
   programs.ssh = {
     enable = true;
     addKeysToAgent = "yes";
