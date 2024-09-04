@@ -61,6 +61,15 @@
   # Enable touchpad support
   services.libinput.enable = true;
 
+  # Display Manager
+  # services.displayManager.enable = true; ?
+  services.displayManager.sddm = {
+    enable = true;
+    wayland.enable = true;
+    theme = "catppuccin-latte";
+    package = pkgs.kdePackages.sddm;
+  };
+
   # Define a user account. Don't forget to set a password with `passwd`.
   users.users.ben = {
     isNormalUser = true;
@@ -107,6 +116,13 @@
   environment.systemPackages = with pkgs; [
     wget
     git
+    (catppuccin-sddm.override {
+      flavor = "latte";
+      font = "Noto Sans";
+      fontSize = "9";
+      background = "~/Wallpapers/dead-robot.jpg";
+      loginBackground = true;
+    })
 
     firefox
     discord
